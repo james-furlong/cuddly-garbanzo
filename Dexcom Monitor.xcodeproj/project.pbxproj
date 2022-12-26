@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		60185FD5294FC72500EE3E8C /* Dexcom_MonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FD4294FC72500EE3E8C /* Dexcom_MonitorApp.swift */; };
+		60185FD9294FC72600EE3E8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60185FD8294FC72600EE3E8C /* Assets.xcassets */; };
+		60185FDD294FC72600EE3E8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60185FDC294FC72600EE3E8C /* Preview Assets.xcassets */; };
+		60185FE4294FE93A00EE3E8C /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FE3294FE93A00EE3E8C /* DashboardView.swift */; };
+		60185FEB294FE9FA00EE3E8C /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FEA294FE9FA00EE3E8C /* UserView.swift */; };
+		60185FEE29511B2700EE3E8C /* ImageTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FED29511B2700EE3E8C /* ImageTrendView.swift */; };
+		60185FF229511B7700EE3E8C /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FF129511B7700EE3E8C /* Trend.swift */; };
+		60185FF52958E9A800EE3E8C /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FF42958E9A800EE3E8C /* InfoView.swift */; };
+		60185FF72958EDA800EE3E8C /* InfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FF62958EDA800EE3E8C /* InfoType.swift */; };
+		60185FFA2959223400EE3E8C /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FF92959223400EE3E8C /* GraphView.swift */; };
+		60185FFC2959241700EE3E8C /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FFB2959241700EE3E8C /* LineChart.swift */; };
+		60185FFF295A2C6B00EE3E8C /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60185FFE295A2C6B00EE3E8C /* TabBarView.swift */; };
+		60186001295A3E7200EE3E8C /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60186000295A3E7200EE3E8C /* AnalyticsView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		60185FD1294FC72500EE3E8C /* Dexcom Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dexcom Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60185FD4294FC72500EE3E8C /* Dexcom_MonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dexcom_MonitorApp.swift; sourceTree = "<group>"; };
+		60185FD8294FC72600EE3E8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		60185FDA294FC72600EE3E8C /* Dexcom_Monitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dexcom_Monitor.entitlements; sourceTree = "<group>"; };
+		60185FDC294FC72600EE3E8C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		60185FE3294FE93A00EE3E8C /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		60185FEA294FE9FA00EE3E8C /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		60185FED29511B2700EE3E8C /* ImageTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTrendView.swift; sourceTree = "<group>"; };
+		60185FF129511B7700EE3E8C /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
+		60185FF42958E9A800EE3E8C /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		60185FF62958EDA800EE3E8C /* InfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoType.swift; sourceTree = "<group>"; };
+		60185FF92959223400EE3E8C /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		60185FFB2959241700EE3E8C /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		60185FFE295A2C6B00EE3E8C /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		60186000295A3E7200EE3E8C /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		60185FCE294FC72500EE3E8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60185FC8294FC72500EE3E8C = {
+			isa = PBXGroup;
+			children = (
+				60185FD3294FC72500EE3E8C /* Dexcom Monitor */,
+				60185FD2294FC72500EE3E8C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		60185FD2294FC72500EE3E8C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60185FD1294FC72500EE3E8C /* Dexcom Monitor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		60185FD3294FC72500EE3E8C /* Dexcom Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				60185FEF29511B5D00EE3E8C /* Classes */,
+				60185FE7294FE96000EE3E8C /* Resources */,
+				60185FE5294FE94500EE3E8C /* UI */,
+				60185FDA294FC72600EE3E8C /* Dexcom_Monitor.entitlements */,
+				60185FDB294FC72600EE3E8C /* Preview Content */,
+			);
+			path = "Dexcom Monitor";
+			sourceTree = "<group>";
+		};
+		60185FDB294FC72600EE3E8C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				60185FDC294FC72600EE3E8C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		60185FE5294FE94500EE3E8C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				60185FE9294FE9D200EE3E8C /* Components */,
+				60185FE8294FE9C400EE3E8C /* Views */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		60185FE7294FE96000EE3E8C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				60185FD4294FC72500EE3E8C /* Dexcom_MonitorApp.swift */,
+				60185FD8294FC72600EE3E8C /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		60185FE8294FE9C400EE3E8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				60185FE3294FE93A00EE3E8C /* DashboardView.swift */,
+				60186000295A3E7200EE3E8C /* AnalyticsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		60185FE9294FE9D200EE3E8C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				60185FFD295A2C5E00EE3E8C /* TabBar */,
+				60185FF82959221D00EE3E8C /* GraphView */,
+				60185FF32958DBD800EE3E8C /* Info View */,
+				60185FEC29511AF700EE3E8C /* User View */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		60185FEC29511AF700EE3E8C /* User View */ = {
+			isa = PBXGroup;
+			children = (
+				60185FEA294FE9FA00EE3E8C /* UserView.swift */,
+				60185FED29511B2700EE3E8C /* ImageTrendView.swift */,
+			);
+			path = "User View";
+			sourceTree = "<group>";
+		};
+		60185FEF29511B5D00EE3E8C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				60185FF029511B6600EE3E8C /* Enums */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		60185FF029511B6600EE3E8C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				60185FF129511B7700EE3E8C /* Trend.swift */,
+				60185FF62958EDA800EE3E8C /* InfoType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		60185FF32958DBD800EE3E8C /* Info View */ = {
+			isa = PBXGroup;
+			children = (
+				60185FF42958E9A800EE3E8C /* InfoView.swift */,
+			);
+			path = "Info View";
+			sourceTree = "<group>";
+		};
+		60185FF82959221D00EE3E8C /* GraphView */ = {
+			isa = PBXGroup;
+			children = (
+				60185FF92959223400EE3E8C /* GraphView.swift */,
+				60185FFB2959241700EE3E8C /* LineChart.swift */,
+			);
+			path = GraphView;
+			sourceTree = "<group>";
+		};
+		60185FFD295A2C5E00EE3E8C /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				60185FFE295A2C6B00EE3E8C /* TabBarView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		60185FD0294FC72500EE3E8C /* Dexcom Monitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60185FE0294FC72600EE3E8C /* Build configuration list for PBXNativeTarget "Dexcom Monitor" */;
+			buildPhases = (
+				60185FCD294FC72500EE3E8C /* Sources */,
+				60185FCE294FC72500EE3E8C /* Frameworks */,
+				60185FCF294FC72500EE3E8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dexcom Monitor";
+			productName = "Dexcom Monitor";
+			productReference = 60185FD1294FC72500EE3E8C /* Dexcom Monitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60185FC9294FC72500EE3E8C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					60185FD0294FC72500EE3E8C = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 60185FCC294FC72500EE3E8C /* Build configuration list for PBXProject "Dexcom Monitor" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 60185FC8294FC72500EE3E8C;
+			productRefGroup = 60185FD2294FC72500EE3E8C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				60185FD0294FC72500EE3E8C /* Dexcom Monitor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		60185FCF294FC72500EE3E8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60185FDD294FC72600EE3E8C /* Preview Assets.xcassets in Resources */,
+				60185FD9294FC72600EE3E8C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60185FCD294FC72500EE3E8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60185FE4294FE93A00EE3E8C /* DashboardView.swift in Sources */,
+				60185FEB294FE9FA00EE3E8C /* UserView.swift in Sources */,
+				60185FFC2959241700EE3E8C /* LineChart.swift in Sources */,
+				60185FF72958EDA800EE3E8C /* InfoType.swift in Sources */,
+				60185FF229511B7700EE3E8C /* Trend.swift in Sources */,
+				60186001295A3E7200EE3E8C /* AnalyticsView.swift in Sources */,
+				60185FEE29511B2700EE3E8C /* ImageTrendView.swift in Sources */,
+				60185FF52958E9A800EE3E8C /* InfoView.swift in Sources */,
+				60185FD5294FC72500EE3E8C /* Dexcom_MonitorApp.swift in Sources */,
+				60185FFF295A2C6B00EE3E8C /* TabBarView.swift in Sources */,
+				60185FFA2959223400EE3E8C /* GraphView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		60185FDE294FC72600EE3E8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		60185FDF294FC72600EE3E8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		60185FE1294FC72600EE3E8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Dexcom Monitor/Dexcom_Monitor.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Dexcom Monitor/Preview Content\"";
+				DEVELOPMENT_TEAM = 6J46PX2924;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jamesfurlong.Dexcom-Monitor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		60185FE2294FC72600EE3E8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Dexcom Monitor/Dexcom_Monitor.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Dexcom Monitor/Preview Content\"";
+				DEVELOPMENT_TEAM = 6J46PX2924;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.jamesfurlong.Dexcom-Monitor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60185FCC294FC72500EE3E8C /* Build configuration list for PBXProject "Dexcom Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60185FDE294FC72600EE3E8C /* Debug */,
+				60185FDF294FC72600EE3E8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60185FE0294FC72600EE3E8C /* Build configuration list for PBXNativeTarget "Dexcom Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60185FE1294FC72600EE3E8C /* Debug */,
+				60185FE2294FC72600EE3E8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 60185FC9294FC72500EE3E8C /* Project object */;
+}
