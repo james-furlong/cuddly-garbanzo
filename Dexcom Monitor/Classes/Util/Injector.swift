@@ -63,6 +63,8 @@ extension Injector {
     static var version: String = defaultEnvironment.version
 
     static var apiClient: ApiClientType = defaultEnvironment.apiClient
+    
+    static var cache: CacheClient = CacheClient()
     static var log: Logger = Logger()
 }
 

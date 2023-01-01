@@ -49,7 +49,7 @@ class SignUpViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentati
             // TODO: Extract and save token
             let parameters: [String: String] = successUrl.queryParameters ?? [:]
             let authorizationCode: String = parameters["code"] ?? ""
-            self?.retrieveAuthTokens(authorizationCode)
+//            self?.retrieveAuthTokens(authorizationCode)
         }
 
         webSession?.presentationContextProvider = self

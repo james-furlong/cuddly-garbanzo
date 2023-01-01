@@ -43,6 +43,8 @@
 		6096A44F2960D13600BB28F9 /* AuthTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */; };
 		6096A4512960F52700BB28F9 /* DexcomApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4502960F52700BB28F9 /* DexcomApi.swift */; };
 		6096A4532961911000BB28F9 /* AuthRefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */; };
+		6096A4552961927300BB28F9 /* CacheClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4542961927300BB28F9 /* CacheClient.swift */; };
+		6096A4572961969000BB28F9 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4562961969000BB28F9 /* KeychainWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,8 @@
 		6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenRequest.swift; sourceTree = "<group>"; };
 		6096A4502960F52700BB28F9 /* DexcomApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DexcomApi.swift; sourceTree = "<group>"; };
 		6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRefreshRequest.swift; sourceTree = "<group>"; };
+		6096A4542961927300BB28F9 /* CacheClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheClient.swift; sourceTree = "<group>"; };
+		6096A4562961969000BB28F9 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +267,7 @@
 			children = (
 				6096A425295CE43B00BB28F9 /* ApiClient.swift */,
 				6096A4502960F52700BB28F9 /* DexcomApi.swift */,
+				6096A4542961927300BB28F9 /* CacheClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 			children = (
 				6096A42E295E1B3B00BB28F9 /* Injector.swift */,
 				6096A44A295E40A200BB28F9 /* Logger.swift */,
+				6096A4562961969000BB28F9 /* KeychainWrapper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -385,6 +391,8 @@
 				6096A437295E1E9000BB28F9 /* Bundle+Extensions.swift in Sources */,
 				6096A449295E3F8900BB28F9 /* Array+Extensions.swift in Sources */,
 				60185FE4294FE93A00EE3E8C /* DashboardView.swift in Sources */,
+				6096A4572961969000BB28F9 /* KeychainWrapper.swift in Sources */,
+				6096A4552961927300BB28F9 /* CacheClient.swift in Sources */,
 				6096A435295E1D2E00BB28F9 /* Constants.swift in Sources */,
 				6096A43F295E2B0100BB28F9 /* MockApiClient.swift in Sources */,
 				6096A420295B905D00BB28F9 /* NetworkError.swift in Sources */,
