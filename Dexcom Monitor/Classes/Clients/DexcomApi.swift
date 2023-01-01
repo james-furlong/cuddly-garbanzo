@@ -36,7 +36,7 @@ struct DexcomAPI {
         .eraseToAnyPublisher()
     }
     
-    func refreshToken() -> Future<Bool, Error> {
-        
-    }
+//    func refreshToken() -> Future<Bool, Error> {
+//        
+//    }
 }

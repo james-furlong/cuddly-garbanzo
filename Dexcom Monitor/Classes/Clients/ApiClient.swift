@@ -10,7 +10,7 @@ import Combine
 
 protocol ApiClientType {
     func retrieveAuthToken(request: AuthTokenRequest, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ())
-    func refreshAuthToken(request: AuthRefreshRequest, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ())
+//    func refreshAuthToken(request: AuthRefreshRequest, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ())
 }
 
 extension Network {
@@ -29,9 +29,9 @@ extension Network {
                 }
         }
         
-        func refreshAuthToken(request: <<error type>>, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ()) {
-            get(
-        }
+//        func refreshAuthToken(request: <<error type>>, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ()) {
+//            get(
+//        }
         
         // MARK: - Functions
         

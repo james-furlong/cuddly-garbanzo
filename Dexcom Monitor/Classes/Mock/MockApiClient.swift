@@ -8,7 +8,7 @@
 import Foundation
 
 extension Network {
-    struct MockApiClient: ApiClientType {
-        
-    }
+//    struct MockApiClient: ApiClientType {
+//        
+//    }
 }
