@@ -25,9 +25,9 @@ class CacheClient: CacheClientType {
     private var userDefaults: UserDefaults = UserDefaults.standard
     private var keychain: KeychainWrapperType = KeychainWrapper()
     
-    // InternalArchaDiskCacheType
+    // Internal functions
     
-    func storeData(_ data: Data, forKey key: Storable) -> Bool {
+    private func storeData(_ data: Data, forKey key: Storable) -> Bool {
         // If it shouldn't survive app deletion then store in user defaults
         if !key.isSensitive {
             userDefaults.set(data.base64EncodedString(), forKey: key.rawValue)
@@ -40,7 +40,7 @@ class CacheClient: CacheClientType {
         return true
     }
     
-    func retrieveData(forKey key: Storable) -> Data? {
+    private func retrieveData(forKey key: Storable) -> Data? {
         let maybeDataString: String?
 
         if !key.isSensitive {
@@ -56,7 +56,7 @@ class CacheClient: CacheClientType {
         return Data(base64Encoded: dataString)
     }
     
-    // ArchaDiskCacheType
+    // Exposed functions
     
     func cache(_ value: Any?, forKey key: Storable) {
         _ = cacheWithResult(value, forKey: key)

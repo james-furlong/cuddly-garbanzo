@@ -12,7 +12,7 @@ enum Network {}
 
 private let defaultEnvironment: Environment = {
     var environment: TargetEnvironment = TargetEnvironment.production
-    if Bundle.appTarget == "Archa Staging" {
+    if Bundle.appTarget == "Staging" {
         let defaultEnv = TargetEnvironment.mock
         let targetInt: Int = UserDefaults.standard.integer(forKey: Constants.Application.targetKey.rawValue)
         environment = TargetEnvironment(rawValue: (targetInt != 0 ? targetInt : defaultEnv.rawValue))
