@@ -8,11 +8,20 @@
 import Foundation
 
 enum Endpoint {
-    case authentication
+    case authToken(request: AuthTokenRequest)
+    case authRefresh(request: AuthRefreshRequest)
     
     var path: String {
         switch self {
-            case .authentication: return "v2/oauth2/token"
+            case .authToken(let request):
+                return "v2/oauth2/token?client_id=\(request.id)&client_secret=\(request.secret)&code=\(request.code)&grant_type=\(request.type)&redirect_uri=\(request.redirectUrl)"
+        }
+    }
+    
+    var requiresAuth: Bool {
+        switch self {
+            case .authToken: return false
+            default: return true
         }
     }
 }

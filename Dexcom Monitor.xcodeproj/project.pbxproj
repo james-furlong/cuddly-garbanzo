@@ -35,6 +35,14 @@
 		6096A439295E1EC200BB28F9 /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A438295E1EC200BB28F9 /* Optional+Extensions.swift */; };
 		6096A43F295E2B0100BB28F9 /* MockApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A43E295E2B0100BB28F9 /* MockApiClient.swift */; };
 		6096A441295E2C6D00BB28F9 /* Codable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A440295E2C6D00BB28F9 /* Codable+Extensions.swift */; };
+		6096A443295E34A600BB28F9 /* AuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A442295E34A600BB28F9 /* AuthTokenResponse.swift */; };
+		6096A447295E3E6000BB28F9 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A446295E3E6000BB28F9 /* Data+Extensions.swift */; };
+		6096A449295E3F8900BB28F9 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A448295E3F8900BB28F9 /* Array+Extensions.swift */; };
+		6096A44B295E40A200BB28F9 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A44A295E40A200BB28F9 /* Logger.swift */; };
+		6096A44D295F786E00BB28F9 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A44C295F786E00BB28F9 /* Result+Extensions.swift */; };
+		6096A44F2960D13600BB28F9 /* AuthTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */; };
+		6096A4512960F52700BB28F9 /* DexcomApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4502960F52700BB28F9 /* DexcomApi.swift */; };
+		6096A4532961911000BB28F9 /* AuthRefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +77,14 @@
 		6096A438295E1EC200BB28F9 /* Optional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		6096A43E295E2B0100BB28F9 /* MockApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiClient.swift; sourceTree = "<group>"; };
 		6096A440295E2C6D00BB28F9 /* Codable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extensions.swift"; sourceTree = "<group>"; };
+		6096A442295E34A600BB28F9 /* AuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenResponse.swift; sourceTree = "<group>"; };
+		6096A446295E3E6000BB28F9 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		6096A448295E3F8900BB28F9 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		6096A44A295E40A200BB28F9 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		6096A44C295F786E00BB28F9 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
+		6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenRequest.swift; sourceTree = "<group>"; };
+		6096A4502960F52700BB28F9 /* DexcomApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DexcomApi.swift; sourceTree = "<group>"; };
+		6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRefreshRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +251,9 @@
 				6096A436295E1E9000BB28F9 /* Bundle+Extensions.swift */,
 				6096A438295E1EC200BB28F9 /* Optional+Extensions.swift */,
 				6096A440295E2C6D00BB28F9 /* Codable+Extensions.swift */,
+				6096A446295E3E6000BB28F9 /* Data+Extensions.swift */,
+				6096A448295E3F8900BB28F9 /* Array+Extensions.swift */,
+				6096A44C295F786E00BB28F9 /* Result+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -243,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				6096A425295CE43B00BB28F9 /* ApiClient.swift */,
+				6096A4502960F52700BB28F9 /* DexcomApi.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -251,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				6096A42E295E1B3B00BB28F9 /* Injector.swift */,
+				6096A44A295E40A200BB28F9 /* Logger.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -275,6 +296,9 @@
 		6096A43A295E22E800BB28F9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6096A442295E34A600BB28F9 /* AuthTokenResponse.swift */,
+				6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */,
+				6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,7 +381,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6096A44B295E40A200BB28F9 /* Logger.swift in Sources */,
 				6096A437295E1E9000BB28F9 /* Bundle+Extensions.swift in Sources */,
+				6096A449295E3F8900BB28F9 /* Array+Extensions.swift in Sources */,
 				60185FE4294FE93A00EE3E8C /* DashboardView.swift in Sources */,
 				6096A435295E1D2E00BB28F9 /* Constants.swift in Sources */,
 				6096A43F295E2B0100BB28F9 /* MockApiClient.swift in Sources */,
@@ -366,9 +392,13 @@
 				6096A41E295B8DA500BB28F9 /* SignUpViewModel.swift in Sources */,
 				6096A426295CE43B00BB28F9 /* ApiClient.swift in Sources */,
 				6096A41A295B839E00BB28F9 /* SignUpView.swift in Sources */,
+				6096A44D295F786E00BB28F9 /* Result+Extensions.swift in Sources */,
+				6096A443295E34A600BB28F9 /* AuthTokenResponse.swift in Sources */,
+				6096A44F2960D13600BB28F9 /* AuthTokenRequest.swift in Sources */,
 				60185FEB294FE9FA00EE3E8C /* UserView.swift in Sources */,
 				6096A42C295CE66000BB28F9 /* HTTPHeaders.swift in Sources */,
 				60185FFC2959241700EE3E8C /* LineChart.swift in Sources */,
+				6096A447295E3E6000BB28F9 /* Data+Extensions.swift in Sources */,
 				60185FF72958EDA800EE3E8C /* InfoType.swift in Sources */,
 				6096A433295E1BBE00BB28F9 /* Environment.swift in Sources */,
 				6096A439295E1EC200BB28F9 /* Optional+Extensions.swift in Sources */,
@@ -377,6 +407,8 @@
 				60185FF229511B7700EE3E8C /* Trend.swift in Sources */,
 				60186001295A3E7200EE3E8C /* AnalyticsView.swift in Sources */,
 				60185FEE29511B2700EE3E8C /* ImageTrendView.swift in Sources */,
+				6096A4512960F52700BB28F9 /* DexcomApi.swift in Sources */,
+				6096A4532961911000BB28F9 /* AuthRefreshRequest.swift in Sources */,
 				60185FF52958E9A800EE3E8C /* InfoView.swift in Sources */,
 				6096A42F295E1B3B00BB28F9 /* Injector.swift in Sources */,
 				6096A42A295CE5C000BB28F9 /* HTTPMethod.swift in Sources */,

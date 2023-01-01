@@ -10,6 +10,10 @@ import AuthenticationServices
 import Combine
 
 class SignUpViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentationContextProviding {
+    
+    private let clientId: String = "q7QlbWrpLBWNxsoNqqcHTxmMIYyPJYZe"
+    private let clientSecret: String = "ssSn2oayJVGHvnPJ"
+    private let redirctUri: String = "monitor"
 
     // MARK: - ASWebAuthenticationPresentationContextProviding
 
@@ -19,13 +23,13 @@ class SignUpViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentati
     
     // MARK: - Passthrough subjects
     
+    let authTokenSubject: PassthroughSubject<String, Never> = PassthroughSubject()
     let authCompleteSubject: PassthroughSubject<Bool, Never> = PassthroughSubject()
+    let errorSubject: PassthroughSubject<Error, Never> = PassthroughSubject()
 
     var webSession: ASWebAuthenticationSession?
 
     func signIn() {
-        let clientId: String = "q7QlbWrpLBWNxsoNqqcHTxmMIYyPJYZe"
-        let redirctUri: String = "monitor"
         guard var url = URL(string: "https://sandbox-api.dexcom.com/v2/oauth2/login") else { return }
         url.append(queryItems: [
             URLQueryItem(name: "client_id", value: clientId),
@@ -53,7 +57,22 @@ class SignUpViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentati
         webSession?.start()
     }
     
-    func retrieveAuthTokens(_ code: String) {
-        
-    }
+//    func retrieveAuthTokens(_ code: String) {
+//        let authResponse = Injector.apiClient.retrieveAuthToken(request: AuthTokenRequest(
+//            code: code,
+//            id: clientId,
+//            secret: clientSecret,
+//            redirectUrl: redirctUri
+//        ))
+//
+//        let _ = authResponse
+//            .sink(
+//                receiveCompletion: { error in
+//                    errorSubject.
+//                },
+//                receiveValue: { response in
+//                    response
+//                }
+//            )
+//    }
 }

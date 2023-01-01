@@ -25,6 +25,16 @@ private let defaultEnvironment: Environment = {
 // MARK: - Injectable Types for Environment and App
 
 extension Injector {
+    static var testRunningOverride: Bool = {
+        (ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil)
+    }()
+    static var isRunningTests: Bool {
+        return (
+            testRunningOverride &&
+            (ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil)
+        )
+    }
+    
     static var target: TargetEnvironment = defaultEnvironment.target {
         didSet {
             func configure(environment: Environment) {
@@ -53,5 +63,6 @@ extension Injector {
     static var version: String = defaultEnvironment.version
 
     static var apiClient: ApiClientType = defaultEnvironment.apiClient
+    static var log: Logger = Logger()
 }
 
