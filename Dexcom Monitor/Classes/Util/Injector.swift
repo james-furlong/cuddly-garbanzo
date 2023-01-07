@@ -11,9 +11,9 @@ enum Injector {}
 enum Network {}
 
 private let defaultEnvironment: Environment = {
-    var environment: TargetEnvironment = TargetEnvironment.production
+    var environment: TargetEnvironment = TargetEnvironment.staging
     if Bundle.appTarget == "Staging" {
-        let defaultEnv = TargetEnvironment.mock
+        let defaultEnv = TargetEnvironment.staging
         let targetInt: Int = UserDefaults.standard.integer(forKey: Constants.Application.targetKey.rawValue)
         environment = TargetEnvironment(rawValue: (targetInt != 0 ? targetInt : defaultEnv.rawValue))
             .defaulting(to: defaultEnv)
@@ -42,6 +42,7 @@ extension Injector {
                 Injector.version = environment.version
 
                 Injector.apiClient = environment.apiClient
+                Injector.auth = environment.auth
             }
 
             // Cache the environment change
@@ -63,6 +64,7 @@ extension Injector {
     static var version: String = defaultEnvironment.version
 
     static var apiClient: ApiClientType = defaultEnvironment.apiClient
+    static var auth: AuthClient = defaultEnvironment.auth
     
     static var cache: CacheClient = CacheClient()
     static var log: Logger = Logger()

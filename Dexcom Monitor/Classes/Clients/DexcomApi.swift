@@ -11,32 +11,16 @@ import Combine
 struct DexcomAPI {
     let id: String = "q7QlbWrpLBWNxsoNqqcHTxmMIYyPJYZe"
     let secret: String = "ssSn2oayJVGHvnPJ"
-    let redirectUri: String = "monitor"
+    let redirectUri: String = "monitor://"
     
     func verifyAuthorization(token: String) -> AnyPublisher<AuthTokenResponse, Error> {
-        Future { promise in
-            Injector.apiClient.retrieveAuthToken(
-                request: AuthTokenRequest(
-                    code: token,
-                    id: id,
-                    secret: secret,
-                    redirectUrl: redirectUri
-                ),
-                success: { data in
-                    promise(.success(data))
-                },
-                error: { error in
-                    promise(.failure(error))
-                }
+        Injector.apiClient.retrieveAuthToken(
+            request: AuthTokenRequest(
+                code: token,
+                id: id,
+                secret: secret,
+                redirectUri: redirectUri
             )
-        }
-        .compactMap({ $0 })
-        .tryMap { try JSONSerialization.data(withJSONObject: $0, options: .prettyPrinted) }
-        .decode(type: AuthTokenResponse.self, decoder: JSONDecoder())
-        .eraseToAnyPublisher()
+        )
     }
-    
-//    func refreshToken() -> Future<Bool, Error> {
-//        
-//    }
 }

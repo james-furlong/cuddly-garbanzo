@@ -9,29 +9,54 @@ import Foundation
 import Combine
 
 protocol ApiClientType {
-    func retrieveAuthToken(request: AuthTokenRequest, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ())
-//    func refreshAuthToken(request: AuthRefreshRequest, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ())
+    func retrieveAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error>
+    func refreshAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error>
+    
+    func getGlucoseValues(request: GlucoseValuesRequest) -> AnyPublisher<GlucoseValuesResponse, Error>
 }
 
 extension Network {
     struct ApiClient: ApiClientType {
         
         private static let timeoutInterval: TimeInterval = 15
-        
-        func retrieveAuthToken(request: AuthTokenRequest, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ()) {
-            get(.authToken(request: request))
-                .executed(in: Injector.session) { data, err in
-                    if let responseData = data {
-                        success(responseData)
-                    }
-                    
-                    error(err as? NetworkError ?? NetworkError.api)
-                }
+
+        func retrieveAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error> {
+            post(.authToken, request)
+                .executed(in: Injector.session)
+                .mapError { $0 as! NetworkError }
+                .decode(type: AuthTokenResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
         }
         
-//        func refreshAuthToken(request: <<error type>>, success: @escaping (Data) -> (), error: @escaping (NetworkError) -> ()) {
-//            get(
-//        }
+        func refreshAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error> {
+            post(.authRefresh, request)
+                .executed(in: Injector.session)
+                .mapError { $0 as! NetworkError }
+                .decode(type: AuthTokenResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
+        
+        func getGlucoseValues(request: GlucoseValuesRequest) -> AnyPublisher<GlucoseValuesResponse, Error> {
+            return Injector.auth.validToken()
+                .flatMap { token in
+                    get(.glucoseValues(request))
+                        .executed(in: Injector.session, token: token)
+                }
+                .tryCatch { error -> AnyPublisher<Data, Error> in
+                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
+                        throw error
+                    }
+                    
+                    return Injector.auth.validToken(forceRefresh: true)
+                        .flatMap { token in
+                            get(.glucoseValues(request))
+                                .executed(in: Injector.session, token: token)
+                        }
+                        .eraseToAnyPublisher()
+                }
+                .decode(type: GlucoseValuesResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
         
         // MARK: - Functions
         
@@ -40,17 +65,23 @@ extension Network {
         }
         
         private func post<T>(_ endpoint: Endpoint, _ body: T) -> URLRequest? where T: Encodable {
-            generateRequest(method: .post, endpoint: endpoint, bodyData: generateData(for: body))
+            generateRequest(method: .post, endpoint: endpoint, bodyData: generateData(for: body, with: endpoint))
         }
         
-        private func generateData<T>(for body: T) -> Data? where T: Encodable {
-            guard let encodedData: Data = body.encodedToData() else { return nil }
-
+        private func generateData<T>(for body: T, with endpoint: Endpoint) -> Data? where T: Encodable {
+            let encodedData: Data?
+            if let urlBody = body as? UrlEncodable {
+                encodedData = urlBody.bodyComponents.query?.data(using: .utf8)
+            }
+            else {
+                encodedData = body.encodedToData()
+            }
+            
             return encodedData
         }
         
         private func generateRequest(method: HTTPMethod, endpoint: Endpoint, bodyData: Data? = nil) -> URLRequest? {
-            let headers = generateHeaders(hasBody: bodyData != nil, requiresAuth: endpoint.requiresAuth)
+            let headers = generateHeaders(hasBody: bodyData != nil, requiresAuth: endpoint.requiresAuth, bodyIsUrlEncoded: endpoint.isUrlEncodedBody)
             let urlString = self.urlForEndpoint(endpoint)
             
             guard let url = URL(string: urlString) else {
@@ -80,10 +111,10 @@ extension ApiClientType {
         return "\(Injector.httpProtocol)://\(Injector.baseUrl)/\(Injector.version)/\(endpointPath)"
     }
 
-    fileprivate func generateHeaders(hasBody: Bool, requiresAuth: Bool) -> HTTPHeaders {
+    fileprivate func generateHeaders(hasBody: Bool, requiresAuth: Bool, bodyIsUrlEncoded: Bool) -> HTTPHeaders {
         var headers: HTTPHeaders = [:]
         
-        headers[HTTPHeader.contentType.rawValue] = "application/x-www-form-urlencoded"
+        headers[HTTPHeader.contentType.rawValue] = bodyIsUrlEncoded ? "application/x-www-form-urlencoded" : "application/json"
         
         if requiresAuth {
             let authToken = ""
@@ -97,10 +128,12 @@ extension ApiClientType {
 // MARK: - URL Request
 
 public extension Optional where Wrapped == URLRequest {
-    func executed(in session: URLSession, completionHabdler: @escaping (Data?, Error?) -> Void) {
-        guard let request = self else {
-            completionHabdler(nil, NetworkError.invalidData)
-            return
+    internal func executed(in session: URLSession, token: AuthTokenResponse? = nil) -> AnyPublisher<Data, Error> {
+        guard var request = self else {
+            return Fail(error: NetworkError.invalidData).eraseToAnyPublisher()
+        }
+        if let token = token {
+            request.setValue("Bearer \(token.authToken)", forHTTPHeaderField: HTTPHeader.authorization.rawValue)
         }
         
         #if DEBUG
@@ -119,35 +152,29 @@ public extension Optional where Wrapped == URLRequest {
         Injector.log.verbose(requestString)
         #endif
         
-        let task = session.dataTask(with: request) { maybeData, response, error in
-            #if DEBUG
-            let bodyString: String = maybeData?.formattedString() ?? ""
-            var responseString: String = ""
-            responseString += "<---- Api Response -- \(requestUuid) -->"
-            responseString += "\n---- [\(request.httpMethod ?? "GET")] \(request.url?.absoluteString ?? "No Url")"
-            responseString += "\n---- Status Code: \(((response as? HTTPURLResponse)?.statusCode ?? -1))"
-            responseString += (bodyString.isEmpty ? "" : "\n---- Body:\n\(bodyString)")
-            responseString += "\n<---- End Response -- \(requestUuid) -->"
-            #endif
-            
-            if let error = error {
-                completionHabdler(nil, error)
+        return session.dataTaskPublisher(for: request)
+            .tryMap { result in
+                #if DEBUG
+                let bodyString: String = result.data.formattedString()
+                var responseString: String = ""
+                responseString += "<---- Api Response --->"
+                responseString += "\n---- [\(request.httpMethod ?? "GET")] \(request.url?.absoluteString ?? "No Url")"
+                responseString += "\n---- Status Code: \(((result.response as? HTTPURLResponse)?.statusCode ?? -1))"
+                responseString += (bodyString.isEmpty ? "" : "\n---- Body:\n\(bodyString)")
+                responseString += "\n<---- End Response --->"
+                Injector.log.verbose(responseString)
+                #endif
+
+                if let networkError: NetworkError = NetworkError(
+                    statusCode: (result.response as? HTTPURLResponse)?.statusCode,
+                    data: result.data,
+                    urlPath: request.url?.path
+                ) {
+                    throw networkError
+                }
+
+                return result.data
             }
-            
-            if let networkError: NetworkError = NetworkError(
-                statusCode: (response as? HTTPURLResponse)?.statusCode,
-                data: maybeData,
-                urlPath: request.url?.path
-            ) {
-                completionHabdler(nil, networkError)
-            }
-            
-            guard let data: Data = maybeData else {
-                completionHabdler(nil, NetworkError.invalidData)
-                return
-            }
-            
-            completionHabdler(data, nil)
-        }
+            .eraseToAnyPublisher()
     }
 }

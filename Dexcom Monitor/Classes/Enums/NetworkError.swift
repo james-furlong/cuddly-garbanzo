@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-enum NetworkError: Error {
+enum NetworkError: Decodable, Equatable {
     // Request errors
     case invalidUrl
     case parsing(description: String)
@@ -43,6 +43,8 @@ enum NetworkError: Error {
     }
 }
 
+extension NetworkError: Error { }
+
 extension NetworkError {
     init(error: NSError) {
         switch error.code {
@@ -53,7 +55,7 @@ extension NetworkError {
     }
 
     init?(statusCode: Int?, data: Data?, urlPath: String?) {
-        guard let statusCode: Int = statusCode, statusCode == 200 || statusCode == 302 else {
+        guard let statusCode: Int = statusCode, statusCode != 200 && statusCode != 302 else {
             return nil
         }
 

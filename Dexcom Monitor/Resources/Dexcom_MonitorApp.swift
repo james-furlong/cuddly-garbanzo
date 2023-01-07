@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct Dexcom_MonitorApp: App {
+    init() {
+        Injector.log.logLevel = .verbose
+    }
+    
     var body: some Scene {
         WindowGroup {
             SignUpView()

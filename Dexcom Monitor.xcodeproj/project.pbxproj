@@ -42,9 +42,13 @@
 		6096A44D295F786E00BB28F9 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A44C295F786E00BB28F9 /* Result+Extensions.swift */; };
 		6096A44F2960D13600BB28F9 /* AuthTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */; };
 		6096A4512960F52700BB28F9 /* DexcomApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4502960F52700BB28F9 /* DexcomApi.swift */; };
-		6096A4532961911000BB28F9 /* AuthRefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */; };
 		6096A4552961927300BB28F9 /* CacheClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4542961927300BB28F9 /* CacheClient.swift */; };
 		6096A4572961969000BB28F9 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4562961969000BB28F9 /* KeychainWrapper.swift */; };
+		6096A45B2962B2A200BB28F9 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A45A2962B2A200BB28F9 /* AuthClient.swift */; };
+		6096A45D2962B31400BB28F9 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A45C2962B31400BB28F9 /* NetworkSession.swift */; };
+		6096A45F2962B4FF00BB28F9 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A45E2962B4FF00BB28F9 /* URLSession+Extensions.swift */; };
+		6096A4632968E61600BB28F9 /* GlucoseValuesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4622968E61600BB28F9 /* GlucoseValuesRequest.swift */; };
+		6096A4652968E62200BB28F9 /* GlucoseValuesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096A4642968E62200BB28F9 /* GlucoseValuesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,9 +90,13 @@
 		6096A44C295F786E00BB28F9 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
 		6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenRequest.swift; sourceTree = "<group>"; };
 		6096A4502960F52700BB28F9 /* DexcomApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DexcomApi.swift; sourceTree = "<group>"; };
-		6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRefreshRequest.swift; sourceTree = "<group>"; };
 		6096A4542961927300BB28F9 /* CacheClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheClient.swift; sourceTree = "<group>"; };
 		6096A4562961969000BB28F9 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		6096A45A2962B2A200BB28F9 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
+		6096A45C2962B31400BB28F9 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		6096A45E2962B4FF00BB28F9 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
+		6096A4622968E61600BB28F9 /* GlucoseValuesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseValuesRequest.swift; sourceTree = "<group>"; };
+		6096A4642968E62200BB28F9 /* GlucoseValuesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlucoseValuesResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +266,7 @@
 				6096A446295E3E6000BB28F9 /* Data+Extensions.swift */,
 				6096A448295E3F8900BB28F9 /* Array+Extensions.swift */,
 				6096A44C295F786E00BB28F9 /* Result+Extensions.swift */,
+				6096A45E2962B4FF00BB28F9 /* URLSession+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,6 +277,7 @@
 				6096A425295CE43B00BB28F9 /* ApiClient.swift */,
 				6096A4502960F52700BB28F9 /* DexcomApi.swift */,
 				6096A4542961927300BB28F9 /* CacheClient.swift */,
+				6096A45A2962B2A200BB28F9 /* AuthClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -278,6 +288,7 @@
 				6096A42E295E1B3B00BB28F9 /* Injector.swift */,
 				6096A44A295E40A200BB28F9 /* Logger.swift */,
 				6096A4562961969000BB28F9 /* KeychainWrapper.swift */,
+				6096A45C2962B31400BB28F9 /* NetworkSession.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -302,9 +313,8 @@
 		6096A43A295E22E800BB28F9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6096A442295E34A600BB28F9 /* AuthTokenResponse.swift */,
-				6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */,
-				6096A4522961911000BB28F9 /* AuthRefreshRequest.swift */,
+				6096A4612968E60800BB28F9 /* Glucose */,
+				6096A4602968E5FE00BB28F9 /* Auth */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -315,6 +325,24 @@
 				6096A43E295E2B0100BB28F9 /* MockApiClient.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		6096A4602968E5FE00BB28F9 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				6096A442295E34A600BB28F9 /* AuthTokenResponse.swift */,
+				6096A44E2960D13600BB28F9 /* AuthTokenRequest.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		6096A4612968E60800BB28F9 /* Glucose */ = {
+			isa = PBXGroup;
+			children = (
+				6096A4622968E61600BB28F9 /* GlucoseValuesRequest.swift */,
+				6096A4642968E62200BB28F9 /* GlucoseValuesResponse.swift */,
+			);
+			path = Glucose;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,6 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6096A4632968E61600BB28F9 /* GlucoseValuesRequest.swift in Sources */,
 				6096A44B295E40A200BB28F9 /* Logger.swift in Sources */,
 				6096A437295E1E9000BB28F9 /* Bundle+Extensions.swift in Sources */,
 				6096A449295E3F8900BB28F9 /* Array+Extensions.swift in Sources */,
@@ -407,6 +436,7 @@
 				6096A42C295CE66000BB28F9 /* HTTPHeaders.swift in Sources */,
 				60185FFC2959241700EE3E8C /* LineChart.swift in Sources */,
 				6096A447295E3E6000BB28F9 /* Data+Extensions.swift in Sources */,
+				6096A45B2962B2A200BB28F9 /* AuthClient.swift in Sources */,
 				60185FF72958EDA800EE3E8C /* InfoType.swift in Sources */,
 				6096A433295E1BBE00BB28F9 /* Environment.swift in Sources */,
 				6096A439295E1EC200BB28F9 /* Optional+Extensions.swift in Sources */,
@@ -416,11 +446,13 @@
 				60186001295A3E7200EE3E8C /* AnalyticsView.swift in Sources */,
 				60185FEE29511B2700EE3E8C /* ImageTrendView.swift in Sources */,
 				6096A4512960F52700BB28F9 /* DexcomApi.swift in Sources */,
-				6096A4532961911000BB28F9 /* AuthRefreshRequest.swift in Sources */,
+				6096A4652968E62200BB28F9 /* GlucoseValuesResponse.swift in Sources */,
 				60185FF52958E9A800EE3E8C /* InfoView.swift in Sources */,
+				6096A45F2962B4FF00BB28F9 /* URLSession+Extensions.swift in Sources */,
 				6096A42F295E1B3B00BB28F9 /* Injector.swift in Sources */,
 				6096A42A295CE5C000BB28F9 /* HTTPMethod.swift in Sources */,
 				60185FD5294FC72500EE3E8C /* Dexcom_MonitorApp.swift in Sources */,
+				6096A45D2962B31400BB28F9 /* NetworkSession.swift in Sources */,
 				60185FFF295A2C6B00EE3E8C /* TabBarView.swift in Sources */,
 				60185FFA2959223400EE3E8C /* GraphView.swift in Sources */,
 			);
@@ -584,6 +616,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Dexcom Monitor/Dexcom_Monitor.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Dexcom Monitor/Preview Content\"";
@@ -610,6 +643,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.jamesfurlong.Dexcom-Monitor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;

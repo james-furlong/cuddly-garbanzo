@@ -16,6 +16,7 @@ protocol Environment {
     var version: String { get }
 
     var apiClient: ApiClientType { get }
+    var auth: AuthClient { get }
 }
 
 // MARK: - Target Environment
@@ -50,9 +51,10 @@ struct MockEnvironment: Environment {
 
     let httpProtocol: String = "https"
     let baseUrl: String = ""
-    let version: String = "V1"
+    let version: String = "v1"
 
-    let apiClient: ApiClientType = Network.MockApiClient()
+    let apiClient: ApiClientType = Network.ApiClient()//MockApiClient()
+    let auth: AuthClient = AuthClient()
 }
 
 struct StagingEnvironment: Environment {
@@ -61,9 +63,10 @@ struct StagingEnvironment: Environment {
 
     let httpProtocol: String = "https"
     let baseUrl: String = "sandbox-api.dexcom.com"
-    let version: String = "V2"
+    let version: String = "v2"
     
     let apiClient: ApiClientType = Network.ApiClient()
+    let auth: AuthClient = AuthClient()
 }
 
 struct ProductionEnvironment: Environment {
@@ -72,7 +75,8 @@ struct ProductionEnvironment: Environment {
 
     let httpProtocol: String = "https"
     let baseUrl: String = "api.dexcom.com"
-    let version: String = "V2"
+    let version: String = "v2"
     
     let apiClient: ApiClientType = Network.ApiClient()
+    let auth: AuthClient = AuthClient()
 }

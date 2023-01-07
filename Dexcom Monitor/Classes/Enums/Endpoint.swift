@@ -8,13 +8,14 @@
 import Foundation
 
 enum Endpoint {
-    case authToken(request: AuthTokenRequest)
-    case authRefresh(request: AuthRefreshRequest)
+    case authToken
+    case authRefresh
+    case glucoseValues(GlucoseValuesRequest)
     
     var path: String {
         switch self {
-            case .authToken(let request):
-                return "v2/oauth2/token?client_id=\(request.id)&client_secret=\(request.secret)&code=\(request.code)&grant_type=\(request.type)&redirect_uri=\(request.redirectUrl)"
+            case .authToken: return "oauth2/token"
+            case .glucoseValues(let request): return "users/self/egvs?startDate=\(request.startDateTime)&endDate=\(request.endDateTime)"
             default: return ""
         }
     }
@@ -23,6 +24,13 @@ enum Endpoint {
         switch self {
             case .authToken: return false
             default: return true
+        }
+    }
+    
+    var isUrlEncodedBody: Bool {
+        switch self {
+            case .authToken, .authRefresh: return true
+            default: return false
         }
     }
 }

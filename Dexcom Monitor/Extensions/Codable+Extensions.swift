@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol UrlEncodable {
+    var bodyComponents: URLComponents { get }
+}
+
 extension Encodable {
     func encodedToString() -> String? {
         guard let data: Data = self.encodedToData() else { return nil }

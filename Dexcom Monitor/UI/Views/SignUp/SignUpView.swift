@@ -39,15 +39,15 @@ struct SignUpView: View {
         }
     }
     
-    init() {
-        setupSink()
-    }
-    
-    func setupSink() {
-        viewModel.authCompleteSubject.sink { isComplete in
-            // TODO: Move to dashboard
-        }
-    }
+//    init() {
+//        setupSink()
+//    }
+//    
+//    func setupSink() {
+//        viewModel.authCompleteSubject.sink { isComplete in
+//            // TODO: Move to dashboard
+//        }
+//    }
 }
 
 struct SignUpView_Previews: PreviewProvider {
