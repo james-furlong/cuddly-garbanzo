@@ -12,7 +12,11 @@ protocol ApiClientType {
     func retrieveAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error>
     func refreshAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error>
     
-    func getGlucoseValues(request: GlucoseValuesRequest) -> AnyPublisher<GlucoseValuesResponse, Error>
+    func getGlucoseValues(query: QueryRequest) -> AnyPublisher<GlucoseValuesResponse, Error>
+    func getCalibrations(query: QueryRequest) -> AnyPublisher<CalibrationsResponse, Error>
+    func getDataRange() -> AnyPublisher<DataRangeResponse, Error>
+    func getDevices(query: QueryRequest) -> AnyPublisher<DevicesResponse, Error>
+    func getEvents(query: QueryRequest) -> AnyPublisher<EventsResponse, Error>
 }
 
 extension Network {
@@ -20,6 +24,8 @@ extension Network {
         
         private static let timeoutInterval: TimeInterval = 15
 
+        // MARK: - Auth
+        
         func retrieveAuthToken(request: AuthTokenRequest) -> AnyPublisher<AuthTokenResponse, Error> {
             post(.authToken, request)
                 .executed(in: Injector.session)
@@ -36,10 +42,12 @@ extension Network {
                 .eraseToAnyPublisher()
         }
         
-        func getGlucoseValues(request: GlucoseValuesRequest) -> AnyPublisher<GlucoseValuesResponse, Error> {
+        // MARK: - General
+        
+        func getGlucoseValues(query: QueryRequest) -> AnyPublisher<GlucoseValuesResponse, Error> {
             return Injector.auth.validToken()
                 .flatMap { token in
-                    get(.glucoseValues(request))
+                    get(.glucoseValues(query))
                         .executed(in: Injector.session, token: token)
                 }
                 .tryCatch { error -> AnyPublisher<Data, Error> in
@@ -49,12 +57,100 @@ extension Network {
                     
                     return Injector.auth.validToken(forceRefresh: true)
                         .flatMap { token in
-                            get(.glucoseValues(request))
+                            get(.glucoseValues(query))
                                 .executed(in: Injector.session, token: token)
                         }
                         .eraseToAnyPublisher()
                 }
                 .decode(type: GlucoseValuesResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
+        
+        func getCalibrations(query: QueryRequest) -> AnyPublisher<CalibrationsResponse, Error> {
+            return Injector.auth.validToken()
+                .flatMap { token in
+                    get(.calibrations(query))
+                        .executed(in: Injector.session, token: token)
+                }
+                .tryCatch { error -> AnyPublisher<Data, Error> in
+                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
+                        throw error
+                    }
+                    
+                    return Injector.auth.validToken(forceRefresh: true)
+                        .flatMap { token in
+                            get(.calibrations(query))
+                                .executed(in: Injector.session, token: token)
+                        }
+                        .eraseToAnyPublisher()
+                }
+                .decode(type: CalibrationsResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
+        
+        func getDataRange() -> AnyPublisher<DataRangeResponse, Error> {
+            return Injector.auth.validToken()
+                .flatMap { token in
+                    get(.dataRange)
+                        .executed(in: Injector.session, token: token)
+                }
+                .tryCatch { error -> AnyPublisher<Data, Error> in
+                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
+                        throw error
+                    }
+                    
+                    return Injector.auth.validToken(forceRefresh: true)
+                        .flatMap { token in
+                            get(.dataRange)
+                                .executed(in: Injector.session, token: token)
+                        }
+                        .eraseToAnyPublisher()
+                }
+                .decode(type: DataRangeResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
+        
+        func getDevices(query: QueryRequest) -> AnyPublisher<DevicesResponse, Error> {
+            return Injector.auth.validToken()
+                .flatMap { token in
+                    get(.devices(query))
+                        .executed(in: Injector.session, token: token)
+                }
+                .tryCatch { error -> AnyPublisher<Data, Error> in
+                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
+                        throw error
+                    }
+                    
+                    return Injector.auth.validToken(forceRefresh: true)
+                        .flatMap { token in
+                            get(.devices(query))
+                                .executed(in: Injector.session, token: token)
+                        }
+                        .eraseToAnyPublisher()
+                }
+                .decode(type: DevicesResponse.self, decoder: JSONDecoder())
+                .eraseToAnyPublisher()
+        }
+        
+        func getEvents(query: QueryRequest) -> AnyPublisher<EventsResponse, Error> {
+            return Injector.auth.validToken()
+                .flatMap { token in
+                    get(.events(query))
+                        .executed(in: Injector.session, token: token)
+                }
+                .tryCatch { error -> AnyPublisher<Data, Error> in
+                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
+                        throw error
+                    }
+                    
+                    return Injector.auth.validToken(forceRefresh: true)
+                        .flatMap { token in
+                            get(.events(query))
+                                .executed(in: Injector.session, token: token)
+                        }
+                        .eraseToAnyPublisher()
+                }
+                .decode(type: EventsResponse.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
         }
         
