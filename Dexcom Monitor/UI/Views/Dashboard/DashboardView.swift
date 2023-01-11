@@ -6,29 +6,32 @@
 //
 
 import SwiftUI
+import Combine
 
 struct DashboardView: View {
-    @State var username: String = "Emily"
-    var date: String {
-        let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "E, dd MMM"
-        return formatter.string(from: Date())
-    }
+    @StateObject private var viewModel: DashboardViewModel = DashboardViewModel()
     
+    @State private var userName: String = ""
+    @State private var date: String = ""
+    @State private var chartData: [LineChartData] = []
+    
+    private var subscriptions: Set<AnyCancellable> = Set()
     var body: some View {
         VStack(spacing: 0) {
             Spacer(minLength: 30)
             HStack {
                 VStack {
-                    Text("Hi, \(username)!")
+                    Text("Hi, \(userName)!")
                         .font(.title.bold())
                         .foregroundColor(Color("FontMain"))
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .onReceive(viewModel.username) { userName = $0 }
                     
                     Text("\(date)")
                         .font(.system(size: 12))
                         .foregroundColor(Color("FontMain").opacity(0.5))
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .onReceive(viewModel.date) { date = $0 }
                 }
                 
                 Button {
@@ -56,7 +59,8 @@ struct DashboardView: View {
             }
             .padding()
             
-            GraphView()
+            GraphView(chartData: chartData)
+                .onReceive(viewModel.glucoseValues) { chartData = $0 }
             
             Spacer()
         }

@@ -10,6 +10,8 @@ import Foundation
 struct Constants {
     enum CachedDataKey: String, CaseIterable, Storable {
         case refreshDateTime = "feb138bf-3b97-4c3d-969f-dca28fe67bab"
+        case username = "e7b31c55-aa5e-4326-bee2-03bbb803b6d2"
+        case followeeName = "53b6e44c-1ba8-4a28-ad81-1d4150835087"
         
         var isSensitive: Bool {
             return false

@@ -1,5 +1,5 @@
 //
-//  SignUpViewModel.swift
+//  LoginViewModel.swift
 //  Dexcom Monitor
 //
 //  Created by James on 28/12/2022.
@@ -9,7 +9,7 @@ import Foundation
 import AuthenticationServices
 import Combine
 
-class SignUpViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentationContextProviding {
+class LoginViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentationContextProviding {
     
     private let api = DexcomAPI()
     private var subscriptions = Set<AnyCancellable>()

@@ -8,7 +8,7 @@
 import Foundation
 
 struct GlucoseValuesResponse: Codable {
-    let unit: String
+    let unit: Unit
     let rateUnit: String
     let egvs: [Egvs]
 }
@@ -16,7 +16,7 @@ struct GlucoseValuesResponse: Codable {
 struct Egvs: Codable {
     let systemTime: Date
     let displayTime: Date
-    let value: Int
+    let value: Double
     let realtimeValue: Int
     let smoothedValue: Int
     let status: EgvsStatus?

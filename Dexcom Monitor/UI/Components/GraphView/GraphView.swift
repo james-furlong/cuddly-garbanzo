@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GraphView: View {
+    @State var chartData: [LineChartData]
+    
     @State var name: String = "Name"
     @State var rangePercentage: Double = 100.0
     @State var bgl: Double = 100.0
@@ -34,7 +36,7 @@ struct GraphView: View {
                 }
                 .padding()
                 
-                LineChart().padding()
+                LineChart(data: chartData).padding()
             }
             .background(Color("AccentColor"))
             .cornerRadius(30)
@@ -47,6 +49,6 @@ struct GraphView: View {
 
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphView()
+        GraphView(chartData: [])
     }
 }
