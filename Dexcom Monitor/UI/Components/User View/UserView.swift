@@ -20,17 +20,17 @@ struct UserView: View {
                 VStack(alignment: .leading) {
                     Text("\(name)")
                         .font(.title.bold())
-                        .foregroundColor(Color("FontMain"))
+                        .foregroundColor(Color("Font"))
                 }
                 .padding()
                 
                 VStack(alignment: .leading) {
                     Text(String(format: "%.0f time in range", rangePercentage))
                         .font(.subheadline)
-                        .foregroundColor(.green)
+                        .foregroundColor(Color("FontSupp"))
                     Text(String(format: "%.1f", bgl))
                         .font(.caption2)
-                        .foregroundColor(Color("FontMain"))
+                        .foregroundColor(Color("Font"))
                         .background(.black.opacity(0.10))
                         .clipShape(Capsule())
                         .frame(alignment: .leading)
@@ -43,15 +43,14 @@ struct UserView: View {
             Spacer()
             Spacer()
             
-            ImageTrendView(imageUrl: "", trend: .increasing)
+            ImageTrendView(imageUrl: "", trend: .stable)
             
             Spacer()
         }
         .frame(height: 150)
-        .background(Color("AccentColor"))
+        .background(Color("BackgroundSupp"))
         .cornerRadius(30)
         .padding()
-        .shadow(radius: 10)
     }
 }
 

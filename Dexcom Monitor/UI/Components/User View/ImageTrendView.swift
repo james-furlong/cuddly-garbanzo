@@ -21,7 +21,7 @@ struct ImageTrendView: View {
                 // Background
                 Circle()
                     .stroke(
-                        .black.opacity(0.2),
+                        .black.opacity(0.1),
                         lineWidth: 10
                     )
                 
@@ -56,6 +56,6 @@ struct ImageTrendView: View {
 
 struct ImageTrendView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageTrendView(imageUrl: "", trend: .rapidlyIncreasing)
+        ImageTrendView(imageUrl: "", trend: .stable)
     }
 }

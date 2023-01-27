@@ -41,7 +41,7 @@ struct GraphView: View {
             .background(Color("AccentColor"))
             .cornerRadius(30)
             .padding()
-            .shadow(radius: 10)
+            .shadow(radius: 10, x: 5, y: 5)
         }
         
     }

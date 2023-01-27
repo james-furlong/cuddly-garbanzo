@@ -13,13 +13,12 @@ struct Dexcom_MonitorApp: App {
     
     init() {
         Injector.log.logLevel = .verbose
-        initialView = Injector.cache.contains(key: Constants.KeychainDataKey.authToken) ? DashboardView() : SignUpView()
+        initialView = Injector.cache.contains(key: Constants.KeychainDataKey.authToken) ? DashboardView() : LoginView()
     }
     
     var body: some Scene {
         WindowGroup {
-            
-            SignUpView()
+            LoginView()
         }
     }
 }

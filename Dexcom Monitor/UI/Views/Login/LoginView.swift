@@ -6,120 +6,116 @@
 //
 
 import SwiftUI
+import Combine
 
 struct LoginView: View {
-    enum ViewState {
-        case start
-        case clientName
-        case userName
-        case login
-        case complete(Bool)
-        
-        var title: String {
-            switch self {
-                case .start: return "Get started"
-                case .clientName: return "Your name"
-                case .userName: return "Their name"
-                case .login: return "Login"
-                case .complete(let isSuccess): return isSuccess ? "Success" : "Error"
-            }
-        }
-        
-        var subtitle: String {
-            switch self {
-                case .start: return "We just need to get a few details from you"
-                case .clientName: return "What would you like us to call you?"
-                case .userName: return "What is the name of the person you're following?"
-                case .login: return "We just need you to log into your follow account"
-                case .complete(let isSuccess): return isSuccess ? "Let's head to your dashboard" : "Something went wrong, try again later"
-            }
-        }
-    }
     
+    private var cancellables = Set<AnyCancellable>()
+    private var details: LoginDetailModel = LoginDetailModel()
+    var authModel: OAuthModel = OAuthModel(api: DexcomAPI())
     
-    
-    let viewModel: LoginViewModel = LoginViewModel()
-    
-    
-    @State var showDetails: Bool = true
-    
+    @State private var viewState: LoginViewState = .clientName
+    @State private var showDetails: Bool = true
+    @State private var inputText: String = ""
+    @FocusState private var textFieldFocused: LoginViewState?
+
     var body: some View {
-        ZStack {
-            RadialGradient(
-                colors: [Color("BackgroundMain"), Color("BackgroundSupp")],
-                center: .center,
-                startRadius: 1,
-                endRadius: 700
-            ).edgesIgnoringSafeArea(.all)
-            
+        GeometryReader { geo in
             VStack {
-                Button("Press to show details") {
-                    withAnimation {
-                        showDetails.toggle()
+                VStack {
+                    if showDetails {
+                        VStack(alignment: .center) {
+                            Text(viewState.title)
+                                .font(.system(size: 35))
+                                .foregroundColor(Color("Font"))
+                                .fontWeight(.semibold)
+                                
+                            
+                            Text(viewState.subtitle)
+                                .foregroundColor(Color("Font"))
+                                .multilineTextAlignment(.center)
+                                .padding(.bottom, 20)
+                        }
+                        .frame(width: geo.size.width - 50)
+                        .transition(.opacity)
+                        
+                        VStack(alignment: .center) {
+                            TextField("", text: $inputText)
+                                .padding()
+                                .background(Color("BackgroundSupp"))
+                                .foregroundColor(Color("Font"))
+                                .cornerRadius(20)
+                                .isHidden(viewState.hideTextField)
+                        }
+                        .frame(width: geo.size.width - 50)
+                        .transition(.backslide)
                     }
                 }
-
-                if showDetails {
-                    // Moves in from the bottom
-                    VStack {
-                        Text("Dexcom Monitor")
-                            .font(.system(size: 35))
-                            .frame(maxWidth: .infinity)
+                .frame(width: geo.size.width)
+                .padding(.top, 30)
+                
+                Spacer()
+                
+                VStack {
+                    Spacer()
+                    
+                    HStack {
+                        Spacer()
                         
-                        // Moves in from leading out, out to trailing edge.
-                        Text("Details go here.")
-//                            .transition(.slide)
-                        
-                        // Starts small and grows to full size.
-                        Text("Details go here.")
-//                            .transition(.scale)
+                        Button {
+                            withAnimation {
+                                showDetails = false
+                            }
+                            submitField()
+                        } label: {
+                            HStack {
+                                Spacer()
+                                
+                                Text(viewState.submitTitle)
+                                    .font(.system(size: 20))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color("Charcoal"))
+                                    .padding()
+                                
+                                Spacer()
+                            }
+                        }
+                        .frame(height: 55)
+                        .background(Color("Accent"))
+                        .cornerRadius(20)
+                        .padding(.bottom, 50)
+                        .padding(.trailing, 30)
+                        .padding(.leading, 30)
                     }
-                    .transition(.backslide)
                 }
+                .frame(width: geo.size.width)
             }
-
-//            VStack(spacing: 0) {
-//                VStack {
-//                    if isShowing {
-//                        Text("Dexcom Monitor")
-//                            .font(.system(size: 35))
-//                            .transition(.move(edge: .bottom))
-//                    }
-//                }
-//
-//                VStack {
-//                    if isShowing {
-//                        Button {
-//                            viewModel.signIn()
-//                        } label: {
-//                            Text("Login")
-//                                .font(.system(size: 20).bold())
-//                                .foregroundColor(Color("FontMain"))
-//                        }
-//                        .padding()
-//                        .transition(.move(edge: .leading))
-//                    }
-//                }
-//            }
-//
-//            VStack {
-//                Spacer()
-//
-//                Button("Test") { isShowing.toggle() }
-//                    .foregroundColor(.black)
-//                    .padding()
-//            }
         }
+        .background(Color("Background"))
+        .edgesIgnoringSafeArea(.all)
     }
     
     init() {
         setupSink()
     }
     
-    func setupSink() {
-        viewModel.authCompleteSubject.sink { isComplete in
-            // TODO: Move to dashboard
+    private func submitField() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            details.update(with: inputText, for: viewState)
+            inputText = ""
+            viewState = viewState.nextState
+            withAnimation {
+                showDetails = true
+            }
         }
+    }
+    
+    mutating func setupSink() {
+        authModel.authCompleteSubject
+            .sink { isComplete in
+                // TODO: Move to dashboard
+            }
+            .store(in: &cancellables)
     }
 }
 

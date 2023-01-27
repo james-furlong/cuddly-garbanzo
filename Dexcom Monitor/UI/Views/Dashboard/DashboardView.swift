@@ -23,13 +23,13 @@ struct DashboardView: View {
                 VStack {
                     Text("Hi, \(userName)!")
                         .font(.title.bold())
-                        .foregroundColor(Color("FontMain"))
+                        .foregroundColor(Color("Font"))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onReceive(viewModel.username) { userName = $0 }
                     
                     Text("\(date)")
                         .font(.system(size: 12))
-                        .foregroundColor(Color("FontMain").opacity(0.5))
+                        .foregroundColor(Color("Font").opacity(0.5))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .onReceive(viewModel.date) { date = $0 }
                 }
@@ -64,12 +64,8 @@ struct DashboardView: View {
             
             Spacer()
         }
-        .background(RadialGradient(
-            colors: [Color("BackgroundMain"), Color("BackgroundSupp")],
-            center: .center,
-            startRadius: 1,
-            endRadius: 700
-        ).edgesIgnoringSafeArea(.all))
+        .background(Color("Background"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

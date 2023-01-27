@@ -17,15 +17,15 @@ struct InfoView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text("\(type.name)")
                     .font(.system(size: 17).weight(.bold))
-                    .foregroundColor(Color("FontMain"))
+                    .foregroundColor(Color("Font"))
                 
                 HStack(alignment: .bottom) {
                     Text(String(format: type == .glucose ? "%.1f" : "%.0f", amount))
                         .font(.system(size: 15).bold())
-                        .foregroundColor(Color("FontMain"))
+                        .foregroundColor(Color("Font"))
                     Text("\(type.valueSubtext)")
                         .font(.system(size: 10))
-                        .foregroundColor(Color("FontMain"))
+                        .foregroundColor(Color("Font"))
                     Spacer()
                 }
             }
@@ -38,9 +38,8 @@ struct InfoView: View {
             
         }
         .frame(height: 100)
-        .background(Color("AccentColor"))
+        .background(Color("BackgroundSupp"))
         .cornerRadius(30)
-        .shadow(radius: 15)
     }
 }
 
