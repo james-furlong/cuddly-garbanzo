@@ -8,17 +8,17 @@
 import Foundation
 import Combine
 
-struct DexcomAPI {
-    let id: String = "q7QlbWrpLBWNxsoNqqcHTxmMIYyPJYZe"
-    let secret: String = "ssSn2oayJVGHvnPJ"
-    let redirectUri: String = "monitor://"
+struct DexcomAPI: Api {
+    var clientId: String = "q7QlbWrpLBWNxsoNqqcHTxmMIYyPJYZe"
+    var clientSecret: String = "ssSn2oayJVGHvnPJ"
+    var redirectUri: String = "monitor://"
     
     func verifyAuthorization(token: String) -> AnyPublisher<AuthTokenResponse, Error> {
         Injector.apiClient.retrieveAuthToken(
             request: AuthTokenRequest(
                 code: token,
-                id: id,
-                secret: secret,
+                id: clientId,
+                secret: clientSecret,
                 redirectUri: redirectUri
             )
         )

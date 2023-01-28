@@ -16,16 +16,16 @@ enum Trend {
     
     var trendColor: Color {
         switch self {
-            case .rapidlyDecreasing, .decreasing: return .red
-            case .stable: return .green
-            case .increasing, .rapidlyIncreasing: return .yellow
+            case .rapidlyDecreasing, .decreasing: return Color("Orange")
+            case .stable: return Color("Turqoise")
+            case .increasing, .rapidlyIncreasing: return Color("Yellow")
         }
     }
     
     var urgentColor: Color {
         switch self {
-            case .rapidlyDecreasing: return .red
-            case .rapidlyIncreasing: return .yellow
+            case .rapidlyDecreasing: return Color("Orange")
+            case .rapidlyIncreasing: return Color("Yellow")
             default: return .clear
         }
     }

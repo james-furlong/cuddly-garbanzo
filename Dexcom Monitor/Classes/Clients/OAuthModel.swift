@@ -1,23 +1,25 @@
 //
-//  LoginViewModel.swift
+//  OAuthModel.swift
 //  Dexcom Monitor
 //
-//  Created by James on 28/12/2022.
+//  Created by James on 22/1/2023.
 //
 
 import Foundation
 import AuthenticationServices
 import Combine
 
-class LoginViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentationContextProviding {
+class OAuthModel: NSObject, ObservableObject, ASWebAuthenticationPresentationContextProviding {
     
-    private let api = DexcomAPI()
-    private var subscriptions = Set<AnyCancellable>()
+    private let api: Api
+    private var cancellables = Set<AnyCancellable>()
     
-    private let clientId: String = "q7QlbWrpLBWNxsoNqqcHTxmMIYyPJYZe"
-    private let clientSecret: String = "ssSn2oayJVGHvnPJ"
-    private let redirctUri: String = "monitor"
-
+    // MARK: - Initialization
+    
+    init(api: Api) {
+        self.api = api
+    }
+    
     // MARK: - ASWebAuthenticationPresentationContextProviding
 
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
@@ -30,12 +32,12 @@ class LoginViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentatio
     let authCompleteSubject: PassthroughSubject<Bool, Never> = PassthroughSubject()
     let errorSubject: CurrentValueSubject<Error?, Never> = CurrentValueSubject(nil)
 
-    var webSession: ASWebAuthenticationSession?
+    private var webSession: ASWebAuthenticationSession?
 
     func signIn() {
         guard var url = URL(string: "https://sandbox-api.dexcom.com/v2/oauth2/login") else { return }
         url.append(queryItems: [
-            URLQueryItem(name: "client_id", value: clientId),
+            URLQueryItem(name: "client_id", value: api.clientId),
             URLQueryItem(name: "redirect_uri", value: "monitor://"),
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: "offline_access")
@@ -43,7 +45,7 @@ class LoginViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentatio
 
         webSession = ASWebAuthenticationSession(
             url: url,
-            callbackURLScheme: redirctUri
+            callbackURLScheme: api.redirectUri
         ) { [weak self] url, error in
             guard error == nil, let successUrl = url else {
                 return
@@ -73,6 +75,6 @@ class LoginViewModel: NSObject, ObservableObject, ASWebAuthenticationPresentatio
                     self?.authCompleteSubject.send(true)
                 }
             )
-            .store(in: &subscriptions)
+            .store(in: &cancellables)
     }
 }

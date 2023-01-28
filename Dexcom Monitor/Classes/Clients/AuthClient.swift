@@ -45,8 +45,8 @@ class AuthClient {
             let publisher = Injector.apiClient
                 .refreshAuthToken(request: AuthTokenRequest(
                     code: token.refreshToken,
-                    id: api.id,
-                    secret: api.secret,
+                    id: api.clientId,
+                    secret: api.clientSecret,
                     redirectUri: api.redirectUri
                 )
             )
