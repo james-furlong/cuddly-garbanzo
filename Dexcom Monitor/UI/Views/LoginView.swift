@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 struct LoginView: View {
+    var complete: () -> ()
     
     private var cancellables = Set<AnyCancellable>()
     private var details: LoginDetailModel = LoginDetailModel()
@@ -29,7 +30,6 @@ struct LoginView: View {
                                 .font(.system(size: 35))
                                 .foregroundColor(Color("Font"))
                                 .fontWeight(.semibold)
-                                
                             
                             Text(viewState.subtitle)
                                 .foregroundColor(Color("Font"))
@@ -95,7 +95,8 @@ struct LoginView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
-    init() {
+    init(completion: @escaping () -> ()) {
+        self.complete = completion
         setupSink()
     }
     
@@ -121,6 +122,6 @@ struct LoginView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView { }
     }
 }
