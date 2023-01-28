@@ -21,6 +21,7 @@ struct Constants {
     enum KeychainDataKey: String, CaseIterable, Storable {
         case authToken = "839b7be6-efe3-4524-877c-555921f3d3f2"
         case refreshToken = "92400100-17f1-4544-9977-4e7dad32ccc2"
+        case tokenExpiry = "4ab9d5e5-46a7-4da1-a28f-c1b36e4c45a2"
         
         var isSensitive: Bool {
             return true

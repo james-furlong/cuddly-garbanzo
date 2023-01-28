@@ -45,111 +45,41 @@ extension Network {
         // MARK: - General
         
         func getGlucoseValues(query: QueryRequest) -> AnyPublisher<GlucoseValuesResponse, Error> {
-            return Injector.auth.validToken()
-                .flatMap { token in
-                    get(.glucoseValues(query))
-                        .executed(in: Injector.session, token: token)
-                }
-                .tryCatch { error -> AnyPublisher<Data, Error> in
-                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
-                        throw error
-                    }
-                    
-                    return Injector.auth.validToken(forceRefresh: true)
-                        .flatMap { token in
-                            get(.glucoseValues(query))
-                                .executed(in: Injector.session, token: token)
-                        }
-                        .eraseToAnyPublisher()
-                }
+            return get(.glucoseValues(query))
+                .authenticated(by: Injector.auth)
+                .executed(in: Injector.session)
                 .decode(type: GlucoseValuesResponse.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
         }
         
         func getCalibrations(query: QueryRequest) -> AnyPublisher<CalibrationsResponse, Error> {
-            return Injector.auth.validToken()
-                .flatMap { token in
-                    get(.calibrations(query))
-                        .executed(in: Injector.session, token: token)
-                }
-                .tryCatch { error -> AnyPublisher<Data, Error> in
-                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
-                        throw error
-                    }
-                    
-                    return Injector.auth.validToken(forceRefresh: true)
-                        .flatMap { token in
-                            get(.calibrations(query))
-                                .executed(in: Injector.session, token: token)
-                        }
-                        .eraseToAnyPublisher()
-                }
+            return get(.calibrations(query))
+                .authenticated(by: Injector.auth)
+                .executed(in: Injector.session)
                 .decode(type: CalibrationsResponse.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
         }
         
         func getDataRange() -> AnyPublisher<DataRangeResponse, Error> {
-            return Injector.auth.validToken()
-                .flatMap { token in
-                    get(.dataRange)
-                        .executed(in: Injector.session, token: token)
-                }
-                .tryCatch { error -> AnyPublisher<Data, Error> in
-                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
-                        throw error
-                    }
-                    
-                    return Injector.auth.validToken(forceRefresh: true)
-                        .flatMap { token in
-                            get(.dataRange)
-                                .executed(in: Injector.session, token: token)
-                        }
-                        .eraseToAnyPublisher()
-                }
+            return get(.dataRange)
+                .authenticated(by: Injector.auth)
+                .executed(in: Injector.session)
                 .decode(type: DataRangeResponse.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
         }
         
         func getDevices(query: QueryRequest) -> AnyPublisher<DevicesResponse, Error> {
-            return Injector.auth.validToken()
-                .flatMap { token in
-                    get(.devices(query))
-                        .executed(in: Injector.session, token: token)
-                }
-                .tryCatch { error -> AnyPublisher<Data, Error> in
-                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
-                        throw error
-                    }
-                    
-                    return Injector.auth.validToken(forceRefresh: true)
-                        .flatMap { token in
-                            get(.devices(query))
-                                .executed(in: Injector.session, token: token)
-                        }
-                        .eraseToAnyPublisher()
-                }
+            return get(.devices(query))
+                .authenticated(by: Injector.auth)
+                .executed(in: Injector.session)
                 .decode(type: DevicesResponse.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
         }
         
         func getEvents(query: QueryRequest) -> AnyPublisher<EventsResponse, Error> {
-            return Injector.auth.validToken()
-                .flatMap { token in
-                    get(.events(query))
-                        .executed(in: Injector.session, token: token)
-                }
-                .tryCatch { error -> AnyPublisher<Data, Error> in
-                    guard let networkError: NetworkError = error as? NetworkError, networkError == .unauthorized else {
-                        throw error
-                    }
-                    
-                    return Injector.auth.validToken(forceRefresh: true)
-                        .flatMap { token in
-                            get(.events(query))
-                                .executed(in: Injector.session, token: token)
-                        }
-                        .eraseToAnyPublisher()
-                }
+            return get(.events(query))
+                .authenticated(by: Injector.auth)
+                .executed(in: Injector.session)
                 .decode(type: EventsResponse.self, decoder: JSONDecoder())
                 .eraseToAnyPublisher()
         }
@@ -177,7 +107,7 @@ extension Network {
         }
         
         private func generateRequest(method: HTTPMethod, endpoint: Endpoint, bodyData: Data? = nil) -> URLRequest? {
-            let headers = generateHeaders(hasBody: bodyData != nil, requiresAuth: endpoint.requiresAuth, bodyIsUrlEncoded: endpoint.isUrlEncodedBody)
+            let headers = generateHeaders(hasBody: bodyData != nil, bodyIsUrlEncoded: endpoint.isUrlEncodedBody)
             let urlString = self.urlForEndpoint(endpoint)
             
             guard let url = URL(string: urlString) else {
@@ -207,15 +137,10 @@ extension ApiClientType {
         return "\(Injector.httpProtocol)://\(Injector.baseUrl)/\(Injector.version)/\(endpointPath)"
     }
 
-    fileprivate func generateHeaders(hasBody: Bool, requiresAuth: Bool, bodyIsUrlEncoded: Bool) -> HTTPHeaders {
+    fileprivate func generateHeaders(hasBody: Bool, bodyIsUrlEncoded: Bool) -> HTTPHeaders {
         var headers: HTTPHeaders = [:]
         
         headers[HTTPHeader.contentType.rawValue] = bodyIsUrlEncoded ? "application/x-www-form-urlencoded" : "application/json"
-        
-        if requiresAuth {
-            let authToken = ""
-            headers[HTTPHeader.authorization.rawValue] = "Bearer \(authToken)"
-        }
         
         return headers
     }
@@ -224,12 +149,13 @@ extension ApiClientType {
 // MARK: - URL Request
 
 public extension Optional where Wrapped == URLRequest {
-    internal func executed(in session: URLSession, token: AuthTokenResponse? = nil) -> AnyPublisher<Data, Error> {
-        guard var request = self else {
+    internal func authenticated(by authClient: AuthClient) -> URLRequest? {
+        authClient.signRequest(request: self)
+    }
+    
+    internal func executed(in session: URLSession) -> AnyPublisher<Data, Error> {
+        guard let request = self else {
             return Fail(error: NetworkError.invalidData).eraseToAnyPublisher()
-        }
-        if let token = token {
-            request.setValue("Bearer \(token.authToken)", forHTTPHeaderField: HTTPHeader.authorization.rawValue)
         }
         
         #if DEBUG
